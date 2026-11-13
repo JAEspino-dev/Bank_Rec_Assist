@@ -1,57 +1,66 @@
-// server.js
+const express = require("express");
+const app = express();
+const mongoose = require("mongoose");
+const passport = require("passport");
+const session = require("express-session"); // this 1 line and the line below, are handling cookies
+const MongoStore = require("connect-mongo")(session);
+const methodOverride = require("method-override");
+const flash = require("express-flash"); // the error message the flashes when people enter an invalid password
+const logger = require("morgan"); // the logger in the terminal
+const connectDB = require("./config/database");
+const mainRoutes = require("./routes/main");
+const postRoutes = require("./routes/posts"); // this is requiring a file "posts" in the "routes" folder
+const CommentRoutes = require("./routes/comment");
 
-// set up ======================================================================
-// get all the tools we need
-require('dotenv').config();
-const express  = require('express');
-const app      = express();
-const port     = process.env.PORT || 8000;
-const MongoClient = require('mongodb').MongoClient
-const { ObjectID } = require('mongodb');
-const mongoose = require('mongoose');
-const passport = require('passport');
-const flash    = require('connect-flash');
-
-const morgan       = require('morgan');
-const cookieParser = require('cookie-parser');
-const bodyParser   = require('body-parser');
-const session      = require('express-session');
-
-// const configDB = require('./config/database.js');
-const configDB = {"url":process.env.MONGODB_URI}
-console.log(configDB)
-let db
-
-// configuration ===============================================================
-mongoose.connect(configDB.url, (err, database) => {
-  if (err) return console.log(err)
-  db = database
-  require('./app/routes.js')(app, passport, db, ObjectID);
-}); // connect to our database
-
-require('./config/passport')(passport); // pass passport for configuration
-
-// set up our express application
-app.use(morgan('dev')); // log every request to the console
-app.use(cookieParser()); // read cookies (needed for auth)
-app.use(bodyParser.json()); // get information from html forms
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('public'))
+//Use .env file in config folder
+require("dotenv").config({ path: "./config/.env" }); // we need to tell express to do this
 
 
-app.set('view engine', 'ejs'); // set up ejs for templating
+// Passport config
+require("./config/passport")(passport);
 
-// required for passport
-app.use(session({
-    secret: 'rcbootcamp2021b', // session secret
-    resave: true,
-    saveUninitialized: true
-}));
+//Connect To Database
+connectDB();
+
+//Using EJS for views
+app.set("view engine", "ejs");
+
+//Static Folder
+app.use(express.static("public"));
+
+//Body Parsing
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+//Logging = setting up morgan to be able to run
+app.use(logger("dev"));
+
+//Use forms for put / delete
+app.use(methodOverride("_method"));
+
+// Setup Sessions - stored in MongoDB
+app.use(
+  session({
+    secret: "keyboard cat",
+    resave: false,
+    saveUninitialized: false,
+    store: new MongoStore({ mongooseConnection: mongoose.connection }),
+  })
+);
+
+// Passport middleware
 app.use(passport.initialize());
-app.use(passport.session()); // persistent login sessions
-app.use(flash()); // use connect-flash for flash messages stored in session
+app.use(passport.session());
 
+//Use flash messages for errors, info, ect...
+app.use(flash());
 
-// launch ======================================================================
-app.listen(port);
-console.log('The magic happens on port ' + port);
+//Setup Routes For Which The Server Is Listening
+app.use("/", mainRoutes);
+app.use("/post", postRoutes);
+app.use("/comment", CommentRoutes);
+
+//Server Running
+app.listen(process.env.PORT, () => {
+  console.log("Server is running, you better catch it!");
+});

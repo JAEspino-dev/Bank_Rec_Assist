@@ -1,25 +1,11 @@
-<!doctype html>
-<html>
-<head>
-    <title>Bank Rec Checker</title>
-    <!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> -->
-    <link rel="stylesheet" href="indexStyle.css">
-</head>
-<body>
-<div class="container">
+<%- include('partials/header') -%>
 
-    <div class="jumbotron text-center">
-        <h1>Expense Tracker</h1>
-        <img src="img/scalePhoto.jpeg" alt="Calculator and Money Photo">
-
-        <p>Login or Signup:</p>
-
-        <button><a href="/login" class="btn btn-default"><span class="fa fa-user"></span>Login</a></button>
-        <button><a href="/signup" class="btn btn-default"><span class="fa fa-user"></span>Signup</a></button>
-
+<main class="container">
+    <div class="row justify-content-around mt-5">
+        <a href="/login" class="col-3 btn btn-primary"> Login</a>
+        <a href="/signup" class="col-3 btn btn-primary"> Signup</a>
     </div>
+</main>
+    
 
-</div>
-</body>
-</html>
+<%- include('partials/footer') -%>

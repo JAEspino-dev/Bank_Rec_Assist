@@ -1,0 +1,33 @@
+<%- include('partials/header') -%>
+  <div class="container">
+    <div class="row justify-content-center mt-5">
+      <ul class="row list-unstyled">
+        <li>
+          <h2>Reconciled Month 1</h2>
+          <p>01/01/2026 - 01/30/2026<p>
+          <p>Matched Transactions = 30</p>
+          <p>Unmatched Transactions: Bank Statement = 0 (This is good!)</p>
+          <p>Unmatched Transactions: Accounting Software Exported Transactions = 23</p>
+          <p>Explanation of unmatched transactions: 23 checks have not yet been cashed as of end of reconciled month</p>
+          <a href="/SamplePost">LINK TO NEW PAGE: See full reconciliation report for Test Month (This would take user to full view of bank statement, Accounting Software Exported Transactions. And lists of Matched, and Unmatched Transactions)</a>
+        </li>
+        <li>
+          <h2>Reconciled Month 2</h2>
+          <p>02/01/2026 - 02/28/2026<p>
+          <p>Matched Transactions = 43</p>
+          <p>Unmatched Transactions: Bank Statement = 0 (This is good!)</p>
+          <p>Unmatched Transactions: Accounting Software Exported Transactions = 5</p>
+          <p>Explanation of unmatched transactions: 5 checks have not yet been cashed as of end of reconciled month</p>
+          <a href="/SamplePost">LINK TO NEW PAGE: See full reconciliation report for Test Month (This would take user to full view of bank statement, Accounting Software Exported Transactions. And lists of Matched, and Unmatched Transactions)</a>
+        </li>
+        <% for(var i=0; i<posts.length; i++) {%>
+          <li class="col-6 justify-content-between mt-5">
+            <a href="/post/<%= posts[i]._id%>">
+              <img class="img-fluid" src="<%= posts[i].image%>">
+            </a>
+          </li>
+          <% } %>
+      </ul>
+    </div>
+  </div>
+  <%- include('partials/footer') -%>

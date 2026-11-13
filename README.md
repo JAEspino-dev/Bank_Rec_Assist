@@ -1,36 +1,30 @@
-# ☀️ Fullstack Reconciliation Assist
+# ☀️ Fullstack Not-Insta App
+Use this social media app if you want to connect with friends, and see your custom feed!
 
-Use this program to help with your bank reconciliations!
 # Link
+Coming Soon!
 
-Coming soon!
+# 📋 How to use
+Download files.   
+Make a new post.   
+Let other users upvote or downvote your post!
 
 # 📷 Images
+<img width="1438" height="1176" alt="Screenshot 2026-10-04 at 5 37 53 PM" src="./public/imgs/ProjectScreenshot.png" />
 
-![Impulse Vs Actual App](public/img/BankRec.png)
+# ✨ Features
+Fully responsive design for desktop and mobile.         
 
-# Planned Features
+# 🔨 Built With
+HTML5 – structure,    
+CSS3 – responsive design and background,    
+JavaScript - frontend and backend.   
+Node - backend.   
 
-Upload bank statement.  
-Login to acounting software of your choice.   
-Run tool.  
-Tool returns matched transactions, you can then clear!  
-
-# CRUD
-
-| Operation | What the User Can Do |
-|---|---|
-| **Create** | Create an account. |
-| **Read** | View session history, individual transactions matched, progress, streaks, and routines. |
-| **Update** | Upload Bank Statements, log in to accounting software. |
-| **Delete** | Delete statements, delete matched transaction. |
-
-## Tech Stack
-
-- **Front End:** HTML, CSS, Vanilla JavaScript, EJS
-- **Back End:** Node.js, Express
-- **Database:** MongoDB
-
-## Getting Started
-
-Setup instructions will be added once the first working version is ready.
+# 🧠 What I Learned
+How to work with Node.    
+How to work with APIs.   
+How to use fetch().   
+How to work with JSON data.  
+How to manipulate the DOM.  
+How to handle errors.  

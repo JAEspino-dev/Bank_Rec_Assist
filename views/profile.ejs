@@ -1,146 +1,66 @@
-<!doctype html>
-<html>
+<%- include('partials/header') -%>
+  <div class="container">
+    <div class="row mt-5">
+      <div class="col-6">
+        <div class="mt-5">
+          <h2>Let's reconcile!</h2>
+          <form action="/post/createPost" enctype="multipart/form-data" method="POST">
+            <div class="mb-3">
+              <label for="title" class="form-label">Statement Beginning Date</label>
+              <input type="date" class="form-control" id="title" name="StatementBeginningDate">
+              <label for="title" class="form-label">Statement Ending Date</label>
+              <input type="date" class="form-control" id="title" name="StatementEndingDate">
+            </div>
+            <div class="mb-3">
+              <label for="imgUpload" class="form-label">Accounting Software Exported Transactions</label>
+              <input type="file" class="form-control" id="imageUpload" name="file">
+            </div>
+            <div class="mb-3">
+              <label for="imgUpload" class="form-label">Bank Statement</label>
+              <input type="file" class="form-control" id="imageUpload" name="file">
+            </div>
+            <label for="dayWindow">Possible match if dates are within
+              <input type="number" id="dayWindow" name="dayWindow" value="5" min="1" max="31">
+              days and amounts match</label>
 
-<head>
-    <title>Jobsite Expense Reimbursement Tracker</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="profileStyle.css">
-</head>
-
-<body>
-
-    <header>
-        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
-    </header>
-<div id="toFlex">
-    <main>
-        <section id="title">
-            <h1>Bank Reconcoliation Checker</h1>
-            <p>Use this tool to clear transactions in your accounting software's bank reconciliation page!</p>
-        </section>
-
-        <section>
-            <h2>How to use:</h2>
-            <p>Add bank statement, log in to your accounting software and navigate to bank reconciliation page, run tool.</p>
-            <p>After tool is ran, review the cleared transactions list!</p>
-            
-            <button>Run Tool</button>
-            <!-- <% { %>
-                <form action="/recordExpense" method="POST"> -->
-                    <!-- <select name="approveStatus">
-                        <option value="Approved">Approved by Manager</option>
-                        <option value="Not Approved">Not Approved</option>
-                    </select> -->
-                    <!-- <input type="date" name="date"> -->
-                    <!-- <input type="text" placeholder="Employee Name" name="employeeName"> -->
-                    <!-- <input type="text" value="<%= user.local.email %>" placeholder="Description"
-                        name="expenseDescription">
-                    <input type="number" step="0.01" placeholder="$ 0.00" name="amountSpent">
-                    <button type="submit">Submit</button>
-                </form>
-                <% } %> -->
-
-        </section>
-
-        <div class="lists">
-
-            <section id="unapprovedExpenses">
-                <h2>Bank Statement</h2>
-                <p>Drag and drop the bank statement here!</p>
-
-                <img src="img/bank_statement.png" alt="Calculator and Money Photo">
-                <button>Delete</button>
-
-                <ul class="">
-                    <!-- Loop through quotes objects from MongoDB -->
-                    <% for(let i=0; i < unapprovedList.length; i++) {%>
-                        <li class="items">
-                            <p>
-                                User that entered transaction: <%= unapprovedList[i].user %>
-                            </p>
-                            <span>
-                                <%= unapprovedList[i].date %>
-                            </span>
-                            <span>
-                                $ <%= unapprovedList[i].amountSpent %>
-                            </span>
-                            <%= unapprovedList[i].expenseDescription %>
-                                </span>
-                        </li>
-                        <button class="deleteButton"
-                            data-msg-id="<%= unapprovedList[i]._id %>">Deny</button>
-                        <button class="updateApproval"
-                            data-msg-id="<%= unapprovedList[i]._id %>">Approve</button>
-                        <% } %>
-                </ul>
-            </section>
-
-            <section id="approvedExpenses">
-                <h2>Accounting Software Login</h2>
-                <p>Log in to your accounting software's bank reconciliation here!</p>
-                <img src="img/NonMatches.png" alt="Calculator and Money Photo">
-                <button>Delete</button>
-
-                <ul>
-                    <% for(let i=0; i < approvedList.length; i++) {%>
-                        <li>
-                            <p>
-                                User that entered transaction: <%= approvedList[i].user %>
-                            </p>
-                            <span data-msg-id="<%= approvedList[i]._id %>">
-                                <%= approvedList[i].date %>
-                            </span>
-                            <span data-msg-id="<%= approvedList[i]._id %>">$ <%=
-                                    approvedList[i].amountSpent %></span>
-                            <span data-msg-id="<%= approvedList[i]._id %>">
-                                <%= approvedList[i].expenseDescription %>
-                            </span>
-                            <span data-msg-id="<%= approvedList[i]._id %>">
-                                <%= approvedList[i].approvedBy %>
-                            </span>
-                        </li>
-                        <button class="deleteButton"
-                            data-msg-id="<%= approvedList[i]._id %>">Delete
-                            entry</button>
-                        <button class="paidOut"
-                            data-msg-id="<%= approvedList[i]._id %>">Check
-                            written</button>
-                        <% } %>
-                </ul>
-            </section>
-
-            <section id="checkWritten">
-                <h2>Matched Transactions</h2>
-                <p>These transactions can now be cleared!</p>
-                <img src="img/AccountingSoftware.png" alt="Calculator and Money Photo">
-                <button>Delete</button>
-                
-                <ul class="">
-                    <!-- Loop through quotes objects from MongoDB -->
-                    <% for(let i=0; i < checkList.length; i++) {%>
-                        <li class="items">
-                            <span>
-                                Manager Approved!
-                            </span>
-                            <span>
-                                <%= checkList[i].date %>
-                            </span>
-                            <span>
-                                $ <%= checkList[i].amountSpent %>
-                            </span>
-                            <%= checkList[i].expenseDescription %></span>
-                        </li>
-                        <button class="deleteButton"
-                            data-msg-id="<%= checkList[i]._id %>">Clear</button>
-                        <% } %>
-                </ul>
-            </section>
+            <!-- <input type="checkbox" id="ignoreSign" name="ignoreSign">
+            <label for="ignoreSign">Ignore +/− sign when comparing amounts</label> -->
+            <button type="submit" class="btn btn-primary" value="Upload">Compare</button>
+          </form>
         </div>
-    </main>
-</div>
-
-    <script src="main.js"></script>
-
-</body>
-</html>
+      </div>
+      <div class="col-6">
+        <ul class="row list-unstyled">
+          <% for(var i=0; i<posts.length; i++) {%>
+            <li class="col-6 justify-content-between mt-5">
+              <a href="/post/<%= posts[i]._id%>">
+                <img class="img-fluid" src="<%= posts[i].image%>">
+              </a>
+            </li>
+            <% } %>
+        </ul>
+        <div class="row justify-content-center mt-5">
+          <a class="btn btn-primary" href="/allSavedMonthsRecs">See Past Month's Reconciliation Reports</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <div>
+    <section>
+      <h2>Transaction Review (After Compare button is hit)</h2>
+      <h3>Matched Transactions = 30</h3>
+      <!-- (List of matched transactions in form of: side by side transactions from Bank Statement and Transactions from Accounting Software Exported Transactions) -->
+      <p><span>Bank Statement Transactions: || </span><span>Accounting Software Exported Transactions:</span></p>
+      <p><span>• 09/01/2026 Check 912 $300</span><span> • 09/01/2026 Check 912 $300</span></p>
+      <h3>Possible Matches</h3>
+      <p><span>Bank Statement Transactions: || </span><span>Accounting Software Exported Transactions:</span></p>
+      <p><span>• 09/04/2026 Check 2 $100</span><span> • 09/01/2026 Check 2 $100</span></p>
+      <!-- <h3>Unmatched Transactions: Bank Statement = 0 (This is good!)</h3>
+      <p>(List of unmatched transactions: Bank statement tranasactions / Accounting Software Exported Transactions)</p>
+      <h3>Unmatched Transactions: Accounting Software Exported Transactions = 23</h3>
+      <p>(List of unmatched transactions: Bank statement tranasactions / Accounting Software Exported Transactions)</p> -->
+      <h3>Explanation:</h3>
+      <p>Unmatched transactions: 23 checks have not yet been cashed as of end of reconciled month</p>
+    </section>
+    <%- include('partials/footer') -%>
