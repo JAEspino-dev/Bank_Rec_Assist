@@ -2,13 +2,12 @@
 Use this social media app if you want to connect with friends, and see your custom feed!
 
 # Link
-Coming Soon!
+[Check out the Site!](https://bank-rec-assist.onrender.com/)
 
 # 📋 How to use
-Download files.   
-Make a new post.   
-Let other users upvote or downvote your post!
-
+Use login details: 
+Username: sample@sample.com
+Password: SampleSample
 # 📷 Images
 <img width="1438" height="1176" alt="Screenshot 2026-10-04 at 5 37 53 PM" src="./public/imgs/ProjectScreenshot.png" />
 
