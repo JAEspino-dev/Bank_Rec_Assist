@@ -1,5 +1,5 @@
-# ☀️ Fullstack Not-Insta App
-Use this social media app if you want to connect with friends, and see your custom feed!
+# ☀️ Bank Rec Assist
+Attention Bookkeepers! Use this app for help with completing monthly reconciliations! 
 
 # Link
 [Check out the Site!](https://bank-rec-assist.onrender.com/)

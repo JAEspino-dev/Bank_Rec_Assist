@@ -4,28 +4,27 @@
       <div class="col-6">
         <div class="mt-5">
           <h2>Let's reconcile!</h2>
-          <form action="/post/createPost" enctype="multipart/form-data" method="POST">
+          <form action="/post/createPost" method="POST">
             <div class="mb-3">
-              <label for="title" class="form-label">Statement Beginning Date</label>
-              <input type="date" class="form-control" id="title" name="StatementBeginningDate">
-              <label for="title" class="form-label">Statement Ending Date</label>
-              <input type="date" class="form-control" id="title" name="StatementEndingDate">
+              <label for="statementBeginningDate" class="form-label">Statement Beginning Date</label>
+              <input type="date" class="form-control" id="title" name="statementBeginningDate">
+              <label for="statementEndingDate" class="form-label">Statement Ending Date</label>
+              <input type="date" class="form-control" id="title" name="statementEndingDate">
             </div>
             <div class="mb-3">
-              <label for="imgUpload" class="form-label">Accounting Software Exported Transactions</label>
-              <input type="file" class="form-control" id="imageUpload" name="file">
+              <label for="AcctSoftwareStatement" class="form-label">Accounting Software Exported Transactions</label>
+              <input type="file" class="form-control" name="AcctSoftwareStatement">
             </div>
             <div class="mb-3">
-              <label for="imgUpload" class="form-label">Bank Statement</label>
-              <input type="file" class="form-control" id="imageUpload" name="file">
+              <label for="BankStatement" class="form-label">Bank Statement</label>
+              <input type="file" class="form-control" name="BankStatement">
             </div>
-            <label for="dayWindow">Possible match if dates are within
-              <input type="number" id="dayWindow" name="dayWindow" value="5" min="1" max="31">
+            <label for="dateTolerance">Possible match if dates are within
+              <input type="number" id="dateTolerance" name="dateTolerance" value="5" min="1" max="31">
               days and amounts match</label>
-
             <!-- <input type="checkbox" id="ignoreSign" name="ignoreSign">
             <label for="ignoreSign">Ignore +/− sign when comparing amounts</label> -->
-            <button type="submit" class="btn btn-primary" value="Upload">Compare</button>
+            <button type="submit" class="btn btn-primary">Compare</button>
           </form>
         </div>
       </div>
