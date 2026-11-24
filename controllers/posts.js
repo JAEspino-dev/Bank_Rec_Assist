@@ -2,36 +2,19 @@ const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
 const Comment = require("../models/Comment");
 
-const csv = require('csv-parser')
-const fs = require('fs')
-const results = [];
-
-fs.createReadStream('data.csv')
-  .pipe(csv())
-  .on('data', (data) => results.push(data))
-  .on('end', () => {
-    console.log(results);
-    // [
-    //   { NAME: 'Daffy Duck', AGE: '24' },
-    //   { NAME: 'Bugs Bunny', AGE: '22' }
-    // ]
-  });
-
 module.exports = {
-
-  getSamplePost: async (req, res) => {
-    try {
-
-      res.render("SamplePost.ejs");
-    } catch (err) {
-      console.log(err);
-    }
-  },
-
   getProfile: async (req, res) => {
     try {
       const posts = await Post.find({ user: req.user.id });
       res.render("profile.ejs", { posts: posts, user: req.user });
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  getFeed: async (req, res) => {
+    try {
+      const posts = await Post.find().sort({ createdAt: "desc" }).lean(); // just give me the raw object, that's what the .lean() does. All documents are objects. .lean() is mongoose
+      res.render("feed.ejs", { posts: posts });
     } catch (err) {
       console.log(err);
     }
@@ -53,25 +36,6 @@ module.exports = {
       console.log(err);
     }
   },
-  // createPost: async (req, res) => {
-  //   try {
-  //     // Upload image to cloudinary
-  //     const result = await cloudinary.uploader.upload(req.file.path); // cloudinary is a package. uploader is a method of that object.uploader is another method of the first uploader property
-
-  //     await Post.create({ // using await because we need the URL from Cloudinary
-  //       title: req.body.title,
-  //       image: result.secure_url, // result came from cloudinary
-  //       cloudinaryId: result.public_id, // result came from cloudinary
-  //       caption: req.body.caption,
-  //       likes: 0,
-  //       user: req.user.id,
-  //     });
-  //     console.log("Post has been added!");
-  //     res.redirect("/profile");
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // },
   createPost: async (req, res) => {
     try {
       // Upload image to cloudinary

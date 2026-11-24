@@ -10,7 +10,8 @@ const logger = require("morgan"); // the logger in the terminal
 const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
 const postRoutes = require("./routes/posts"); // this is requiring a file "posts" in the "routes" folder
-const CommentRoutes = require("./routes/comment");
+const commentRoutes = require("./routes/comment");
+const bankRecRoutes = require("./routes/bankRec");
 
 //Use .env file in config folder
 require("dotenv").config({ path: "./config/.env" }); // we need to tell express to do this
@@ -58,7 +59,8 @@ app.use(flash());
 //Setup Routes For Which The Server Is Listening
 app.use("/", mainRoutes);
 app.use("/post", postRoutes);
-app.use("/comment", CommentRoutes);
+app.use("/comment", commentRoutes);
+app.use("/bankRec", bankRecRoutes);
 
 //Server Running
 app.listen(process.env.PORT, () => {

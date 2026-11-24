@@ -4,12 +4,13 @@ Attention Bookkeepers! Use this app for help with completing monthly reconciliat
 # Link
 [Check out the Site!](https://bank-rec-assist.onrender.com/)
 
-# 📋 How to use
-Use login details: 
-Username: sample@sample.com
-Password: SampleSample
 # 📷 Images
 <img width="1438" height="1176" alt="Screenshot 2026-10-04 at 5 37 53 PM" src="./public/imgs/ProjectScreenshot.png" />
+
+# 📋 How to use
+Use login details:   
+Username: sample@sample.com     
+Password: SampleSample
 
 # ✨ Features
 Fully responsive design for desktop and mobile.         

@@ -4,8 +4,7 @@
       <div class="col-6">
         <div class="mt-5">
           <h2>Let's reconcile!</h2>
-          <form action="/post/createPost" method="POST">
-            <div class="mb-3">
+          <div class="mb-3">
               <label for="statementBeginningDate" class="form-label">Statement Beginning Date</label>
               <input type="date" class="form-control" id="title" name="statementBeginningDate">
               <label for="statementEndingDate" class="form-label">Statement Ending Date</label>
@@ -17,8 +16,10 @@
             </div>
             <div class="mb-3">
               <label for="BankStatement" class="form-label">Bank Statement</label>
-              <input type="file" class="form-control" name="BankStatement">
+              <input type="file" class="form-control" id="userUploadedCSVFile" name="BankStatement" accept=".csv">
             </div>
+            <button id="csvParseInDOM">Sort Transactions</button>
+          <form action="/post/createPost" method="POST">
             <label for="dateTolerance">Possible match if dates are within
               <input type="number" id="dateTolerance" name="dateTolerance" value="5" min="1" max="31">
               days and amounts match</label>
@@ -39,7 +40,7 @@
             <% } %>
         </ul>
         <div class="row justify-content-center mt-5">
-          <a class="btn btn-primary" href="/allSavedMonthsRecs">See Past Month's Reconciliation Reports</a>
+          <a class="btn btn-primary" href="/allSaveMonthsBankRecs">See Past Month's Reconciliation Reports</a>
         </div>
       </div>
     </div>
